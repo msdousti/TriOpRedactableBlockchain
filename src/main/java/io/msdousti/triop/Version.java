@@ -11,7 +11,7 @@ public class Version {
     private final int idx;
 
     public ByteBuffer toByteBuffer() {
-        ByteBuffer buffer = ByteBuffer.allocate(2 * Long.BYTES + 1);
+        ByteBuffer buffer = ByteBuffer.allocate(2 * Integer.BYTES + 1);
         buffer.putInt(me);
         buffer.putInt(idx);
         buffer.put((byte) op.ordinal());

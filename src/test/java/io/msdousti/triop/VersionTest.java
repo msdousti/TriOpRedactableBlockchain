@@ -25,11 +25,11 @@ class VersionTest {
         final ByteBuffer buff = v.toByteBuffer();
 
         assertEquals(0, buff.position());
-        assertEquals(2 * Long.BYTES + 1, buff.limit());
-        assertEquals(2 * Long.BYTES + 1, buff.capacity());
+        assertEquals(2 * Integer.BYTES + 1, buff.limit());
+        assertEquals(2 * Integer.BYTES + 1, buff.capacity());
 
         assertEquals(me, buff.getInt(0));
-        assertEquals(idx, buff.getInt(Long.BYTES));
-        assertEquals(1, buff.get(2 * Long.BYTES));
+        assertEquals(idx, buff.getInt(Integer.BYTES));
+        assertEquals(1, buff.get(2 * Integer.BYTES));
     }
 }
