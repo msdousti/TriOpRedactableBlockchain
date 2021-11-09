@@ -18,11 +18,11 @@ public class Block {
         this.w = (w == null) ? null : w.clone();
     }
 
-    public ByteBuffer getCV() {
-        ByteBuffer vBuff = v.toByteBuffer();
-        ByteBuffer byteBuffer = ByteBuffer.allocate(c.length + vBuff.capacity());
+    public byte[] getCV() {
+        byte[] vBytes = v.toBytes();
+        ByteBuffer byteBuffer = ByteBuffer.allocate(c.length + vBytes.length);
         byteBuffer.put(c);
-        byteBuffer.put(vBuff);
-        return byteBuffer.rewind();
+        byteBuffer.put(vBytes);
+        return byteBuffer.rewind().array();
     }
 }

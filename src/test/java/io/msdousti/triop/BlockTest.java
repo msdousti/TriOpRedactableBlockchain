@@ -23,8 +23,8 @@ class BlockTest {
 
         r.nextBytes(c);
         Block b = new Block(c, v, null);
-        byte[] vArr = v.toByteBuffer().array();
-        byte[] cv = b.getCV().array();
+        byte[] vArr = v.toBytes();
+        byte[] cv = b.getCV();
 
         for (int i = 0; i < c.length; i++)
             assertEquals(c[i], cv[i]);

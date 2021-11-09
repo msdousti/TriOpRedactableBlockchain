@@ -18,18 +18,14 @@ class VersionTest {
     }
 
     @RepeatedTest(value = 10)
-    void toBuffer() {
+    void toBytes() {
         int me = r.nextInt();
         int idx = r.nextInt();
         Version v = new Version(me, Operation.chg, idx);
-        final ByteBuffer buff = v.toByteBuffer();
+        ByteBuffer vBuff = ByteBuffer.wrap(v.toBytes()).rewind();
 
-        assertEquals(0, buff.position());
-        assertEquals(2 * Integer.BYTES + 1, buff.limit());
-        assertEquals(2 * Integer.BYTES + 1, buff.capacity());
-
-        assertEquals(me, buff.getInt(0));
-        assertEquals(idx, buff.getInt(Integer.BYTES));
-        assertEquals(1, buff.get(2 * Integer.BYTES));
+        assertEquals(me, vBuff.getInt(0));
+        assertEquals(idx, vBuff.getInt(Integer.BYTES));
+        assertEquals(1, vBuff.get(2 * Integer.BYTES));
     }
 }
