@@ -10,14 +10,14 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 @State(Scope.Benchmark)
-@Fork(value = 1, warmups = 1)
-@Warmup(iterations = 5, time = 2000, timeUnit = TimeUnit.MILLISECONDS)
-@Measurement(iterations = 5, time = 2000, timeUnit = TimeUnit.MILLISECONDS)
+@Fork(value = 2, warmups = 1)
+@Warmup(iterations = 5, time = 4000, timeUnit = TimeUnit.MILLISECONDS)
+@Measurement(iterations = 5, time = 4000, timeUnit = TimeUnit.MILLISECONDS)
 @BenchmarkMode(Mode.Throughput)
 public class AllBenchmarks {
 
-    private static final int BLOCK_SIZE = 10000;
-    private static final int LEDGER_LEN = 1000;
+    private static final int BLOCK_SIZE = 10_000;
+    private static final int LEDGER_LEN = 100_000;
     private static final int TARGET_BLOCK = 50;
     private static final String ED25519 = "Ed25519";
 
@@ -65,14 +65,14 @@ public class AllBenchmarks {
     // The following methods benchmark basic signature operations
 
     @Benchmark
-    public byte[] sign() throws SignatureException {
+    public byte[] sigSign() throws SignatureException {
         signer.update(b);
         return signer.sign();
     }
 
 
     @Benchmark
-    public boolean verify() throws GeneralSecurityException {
+    public boolean sigVerify() throws GeneralSecurityException {
         verifier.update(b);
         return verifier.verify(sig);
     }
@@ -97,19 +97,19 @@ public class AllBenchmarks {
     // The following methods benchmark redaction AND installation
 
     @Benchmark
-    public boolean changeInstall() throws SignatureException {
+    public boolean installChange() throws SignatureException {
         Block blk = chain.redact(Operation.chg, TARGET_BLOCK, newContent);
         return chain.install(Operation.chg, TARGET_BLOCK, blk);
     }
 
     @Benchmark
-    public boolean insertInstall() throws SignatureException {
+    public boolean installInsert() throws SignatureException {
         Block blk = chain.redact(Operation.ins, TARGET_BLOCK, newContent);
         return chain.install(Operation.ins, TARGET_BLOCK, blk);
     }
 
     @Benchmark
-    public boolean removeInstall() throws SignatureException {
+    public boolean installRemove() throws SignatureException {
         Block blk = chain.redact(Operation.rem, TARGET_BLOCK, newContent);
         return chain.install(Operation.rem, TARGET_BLOCK, blk);
     }
