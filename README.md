@@ -92,7 +92,7 @@ Clone the project, and `cd` into project directory. Run the following command `m
 You should see a `BUILD SUCCESS` at the end. You can also notice that 18 tests were executed, and all of them were successful. The project tests consist of functionality and security tests, and can be found under the `./src/test` directory.
 
 ## Running benchmarks
-This project uses [Java Microbenchmark Harness (JMH) framework](https://github.com/openjdk/jmh) to run the benchmarks, which are located in `src/main/java/io/msdousti/benchmark/AllBenchmarks.java`. The benchmark setup is as follows:
+This project uses [Java Microbenchmark Harness (JMH) framework](https://github.com/openjdk/jmh) to run the benchmarks, which are located in [`src/main/java/io/msdousti/benchmark/AllBenchmarks.java`](https://github.com/msdousti/TriOpRedactableBlockchain/blob/master/src/main/java/io/msdousti/benchmark/AllBenchmarks.java). The benchmark setup is as follows:
 
 ```java
 @State(Scope.Benchmark)
@@ -104,7 +104,7 @@ This project uses [Java Microbenchmark Harness (JMH) framework](https://github.c
 
 It means the benchmark will create two forks, out of which 1 is a warmup fork. Each fork has five warmup iterations and five normal iterations. Each iteration will take 4000 milliseconds. The benchmark mode is set to throughput. All in all, each benchmark will take 2 minutes (for a total 16 minutes for 8 benchmarks). The warmups are there beacuase JVM optimizes code on the go.
 
-To run the benchmarks, simply execute `java -jar target/benchmarks.jar` in the project directory. After around 16 minutes, it will output a nices table for the benchmakrs. The result below are generated on an Apple 2020 laptop with M1 chip and 16 GB of memory.
+To run the benchmarks, simply execute `java -jar target/benchmarks.jar` in the project directory. After around 16 minutes, it will output a nices table for the benchmakrs. The results below are generated on an Apple 2020 laptop with M1 chip and 16 GB of memory.
 
 ```
 Benchmark                     Mode  Cnt     Score    Error  Units
